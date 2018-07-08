@@ -105,6 +105,7 @@ config.optimization = {
 config.plugins = [
   new HtmlWebpackPlugin({
     template: __dirname + '/src/public/index.html',
+    favicon: __dirname + '/src/public/favicon.ico',
     inject: 'body'
   }),
   new CopyWebpackPlugin([
