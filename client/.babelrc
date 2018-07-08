@@ -1,4 +1,15 @@
 {
-  "presets": ["env", "react", "stage-0"],
-  "plugins": ["transform-decorators-legacy"]
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "exclude": ["transform-regenerator"]
+      }
+    ],
+    "react",
+    "stage-0"
+  ],
+  "plugins": ["transform-decorators-legacy"],
+  "retainLines": true
 }

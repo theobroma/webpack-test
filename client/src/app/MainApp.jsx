@@ -15,7 +15,7 @@ export default class MainApp extends React.Component {
         </main>
         <aside className="right-sidebar">
           <FormSection />
-          <div>123</div>
+          <div>222</div>
         </aside>
       </div>
     );
