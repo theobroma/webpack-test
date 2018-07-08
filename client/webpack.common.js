@@ -6,7 +6,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {};
-config.entry = __dirname + '/src/app/app.jsx';
+config.entry = {
+  main: __dirname + '/src/app/app.jsx'
+};
 
 config.output = {
   path: __dirname + '/dist',
@@ -83,22 +85,22 @@ config.module = {
   ]
 };
 
-// config.externals = {
-//   react: 'React',
-//   'react-dom': 'ReactDOM'
-// };
+config.externals = {
+  react: 'React',
+  'react-dom': 'ReactDOM'
+};
 
 config.performance = {
   hints: false
 };
 
-// config.optimization = {
-//   splitChunks: {
-//     cacheGroups: {
-//       commons: { test: /[\\/]node_modules[\\/]/, name: 'vendors', chunks: 'all' }
-//     }
-//   }
-// };
+config.optimization = {
+  splitChunks: {
+    cacheGroups: {
+      commons: { test: /[\\/]node_modules[\\/]/, name: 'vendors', chunks: 'all' }
+    }
+  }
+};
 
 config.plugins = [
   new HtmlWebpackPlugin({
