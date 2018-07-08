@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm run start:dev",
     "start:dev": "webpack-dev-server --mode development --history-api-fallback --inline --progress --colors --port 3000 --config webpack.dev.js",
+    "start:devwrite": "webpack-dev-server --mode development --history-api-fallback --inline --progress --colors --port 3000 --config webpack.dev.write.js",
     "build:stats": "webpack --env production --profile --progress --json > stats.json",
     "build": "npm run clean && npm run build:prod",
     "build:prod": "webpack --mode production --config webpack.prod.js",

@@ -20,13 +20,13 @@ config.plugins = [
       NODE_ENV: JSON.stringify('production')
     }
   }),
-  new webpack.DllReferencePlugin({
-    context: '.',
-    manifest: require('./dist/vendor-manifest.json')
-  }),
-  new AddAssetHtmlPlugin({
-    filepath: path.resolve(__dirname, './dist/*.dll.js')
-  }),
+  // new webpack.DllReferencePlugin({
+  //   context: '.',
+  //   manifest: require('./dist/vendor-manifest.json')
+  // }),
+  // new AddAssetHtmlPlugin({
+  //   filepath: path.resolve(__dirname, './dist/*.dll.js')
+  // }),
   new UglifyJSPlugin({
     cache: true,
     parallel: true,
