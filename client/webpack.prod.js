@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const OptimizeCSSAssets = require('optimize-css-assets-webpack-plugin');
@@ -16,7 +17,28 @@ config.optimization = {
   minimize: true
 };
 
+config.module = {
+  rules: [
+    {
+      test: /\.(sass|scss)$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          { loader: 'css-loader' },
+          //use minimize or OptimizeCSSAssets
+          //{ loader: 'css-loader', options: { minimize: true } },
+          { loader: 'postcss-loader' },
+          { loader: 'sass-loader' }
+        ]
+      })
+    }
+  ]
+};
+
 config.plugins = [
+  // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
+  // inside your code for any environment checks; UglifyJS will automatically
+  // drop any unreachable code.
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify('production')
@@ -48,7 +70,7 @@ config.plugins = [
       }
     }
   }),
-
+  new ExtractTextPlugin({ filename: 'css/[name].css' }),
   new OptimizeCSSAssets()
 ];
 

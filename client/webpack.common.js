@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {};
 
@@ -36,18 +35,18 @@ config.module = {
       },
       exclude: /node_modules/
     },
-    {
-      test: /\.(sass|scss)$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          { loader: 'css-loader' },
-          //{ loader: 'css-loader', options: { minimize: true } },
-          { loader: 'postcss-loader' },
-          { loader: 'sass-loader' }
-        ]
-      })
-    },
+    // {
+    //   test: /\.(sass|scss)$/,
+    //   use: ExtractTextPlugin.extract({
+    //     fallback: 'style-loader',
+    //     use: [
+    //       { loader: 'css-loader' },
+    //       //{ loader: 'css-loader', options: { minimize: true } },
+    //       { loader: 'postcss-loader' },
+    //       { loader: 'sass-loader' }
+    //     ]
+    //   })
+    // },
     {
       test: /\.(jpe?g|png|gif|svg)$/i,
       loaders: [
@@ -109,13 +108,12 @@ config.plugins = [
     template: __dirname + '/src/public/index.html',
     favicon: __dirname + '/src/public/favicon.ico',
     inject: 'body'
-  }),
-  new CopyWebpackPlugin([
-    {
-      from: __dirname + '/src/public'
-    }
-  ]),
-  new ExtractTextPlugin({ filename: 'css/[name].css' })
+  })
+  // new CopyWebpackPlugin([
+  //   {
+  //     from: __dirname + '/src/public'
+  //   }
+  // ])
 ];
 
 module.exports = config;
