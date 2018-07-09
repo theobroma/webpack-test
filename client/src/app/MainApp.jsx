@@ -4,6 +4,7 @@ import React from 'react';
 import TableSection from './containers/TableSection';
 import FormSection from './containers/FormSection';
 import { getUsers } from './actions';
+//import Hello from './Hello.jsx';
 
 export default class MainApp extends React.Component {
   render() {
@@ -15,7 +16,7 @@ export default class MainApp extends React.Component {
         </main>
         <aside className="right-sidebar">
           <FormSection />
-          <div>222</div>
+          <div>33123</div>
         </aside>
       </div>
     );

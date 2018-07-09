@@ -10,7 +10,11 @@ config.devServer = {
   historyApiFallback: true,
   open: true,
   overlay: true,
-  stats: 'minimal'
+  stats: 'minimal',
+  hot: true,
+  // Don't refresh if hot loading fails. Good while
+  // implementing the client interface.
+  hotOnly: true
 };
 
 config.devtool = 'cheap-module-eval-source-map';
@@ -24,7 +28,8 @@ config.plugins = [
     'process.env': {
       NODE_ENV: JSON.stringify('development')
     }
-  })
+  }),
+  new webpack.HotModuleReplacementPlugin()
 ];
 
 module.exports = merge(common, config);

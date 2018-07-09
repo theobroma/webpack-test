@@ -12,6 +12,7 @@ config.entry = {
 
 config.output = {
   path: __dirname + '/dist',
+  publicPath: '/',
   filename: '[name].[hash].js'
 };
 
