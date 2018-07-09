@@ -5,6 +5,8 @@ const common = require('./webpack.common.js');
 
 const config = {};
 
+config.mode = 'development';
+
 config.devServer = {
   contentBase: './src/public',
   historyApiFallback: true,

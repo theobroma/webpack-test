@@ -8,6 +8,8 @@ const common = require('./webpack.common.js');
 
 const config = {};
 
+config.mode = 'production';
+
 config.devtool = 'none';
 //turn off minimize and UglifyJSPlugin to see pretty output bundle
 config.optimization = {

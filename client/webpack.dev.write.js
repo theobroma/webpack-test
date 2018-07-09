@@ -19,6 +19,8 @@ let cleanOptions = {
 
 const config = {};
 
+config.mode = 'development';
+
 config.devServer = {
   contentBase: './src/public',
   historyApiFallback: true,

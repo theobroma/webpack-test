@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {};
+
 config.entry = {
   main: __dirname + '/src/app/app.jsx'
 };
