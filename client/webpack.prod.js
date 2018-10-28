@@ -6,6 +6,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const OptimizeCSSAssets = require('optimize-css-assets-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+
 const smp = new SpeedMeasurePlugin();
 const common = require('./webpack.common.js');
 
@@ -14,7 +15,7 @@ const config = {};
 config.mode = 'production';
 
 config.devtool = 'none';
-//turn off minimize and UglifyJSPlugin to see pretty output bundle
+// turn off minimize and UglifyJSPlugin to see pretty output bundle
 config.optimization = {
   minimize: true,
 };
@@ -27,8 +28,8 @@ config.module = {
         fallback: 'style-loader',
         use: [
           { loader: 'css-loader' },
-          //use minimize or OptimizeCSSAssets
-          //{ loader: 'css-loader', options: { minimize: true } },
+          // use minimize or OptimizeCSSAssets
+          // { loader: 'css-loader', options: { minimize: true } },
           { loader: 'postcss-loader' },
           { loader: 'sass-loader' },
         ],
@@ -76,9 +77,9 @@ config.plugins = [
   new OptimizeCSSAssets(),
 ];
 
-//use this as default
+// use this as default
 // module.exports = merge(common, config);
 
-//uncoment to measure plugins performance
+// uncoment to measure plugins performance
 const mergedConfig = merge(common, config);
 module.exports = smp.wrap(mergedConfig);

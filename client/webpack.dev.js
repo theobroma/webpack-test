@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+
 const smp = new SpeedMeasurePlugin();
 
 const common = require('./webpack.common.js');
@@ -11,7 +12,7 @@ const config = {};
 config.mode = 'development';
 
 config.devtool = 'cheap-module-eval-source-map';
-//config.devtool = 'source-map';
+// config.devtool = 'source-map';
 
 config.module = {
   rules: [
@@ -46,9 +47,9 @@ config.devServer = {
   hotOnly: true,
 };
 
-//use this as default
+// use this as default
 // module.exports = merge(common, config);
 
-//uncoment to measure plugins performance
+// uncoment to measure plugins performance
 const mergedConfig = merge(common, config);
 module.exports = smp.wrap(mergedConfig);

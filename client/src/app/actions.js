@@ -33,7 +33,7 @@ export function getUsers() {
       .then(users => {
         dispatch(getUsersFullfilled(users));
       })
-      .catch(function(response) {
+      .catch((response) => {
         console.log(response);
       });
   };
@@ -55,7 +55,7 @@ export function addUser(user) {
       .then(user => {
         dispatch(addUserFullfilled(user));
       })
-      .catch(function(response) {
+      .catch((response) => {
         console.log(response);
       });
   };
@@ -69,20 +69,16 @@ export function removeUser(id) {
       .then(user => {
         dispatch(removeUserFullfilled(id));
       })
-      .catch(function(response) {
+      .catch((response) => {
         console.log(response);
       });
   };
 }
 
-export const removeUserPending = id => {
-  return { type: REMOVE_USER_PENDING, id };
-};
+export const removeUserPending = id => ({ type: REMOVE_USER_PENDING, id });
 
-export const removeUserFullfilled = id => {
-  return { type: REMOVE_USER_FULFILLED, id };
-};
-//utility fn for request delay
+export const removeUserFullfilled = id => ({ type: REMOVE_USER_FULFILLED, id });
+// utility fn for request delay
 function sleeper(ms) {
   return function(x) {
     return new Promise(resolve => setTimeout(() => resolve(x), ms));

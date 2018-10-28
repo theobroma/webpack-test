@@ -1,0 +1,39 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": ["airbnb","prettier"],
+    "plugins": ["prettier"],      
+    "rules": {
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/require-default-props": [0],
+        "jsx-a11y/anchor-is-valid": 0,
+        "jsx-a11y/label-has-for": [ 2, {
+            "components": [ "Label" ],
+            "required": {
+                "some": [ "nesting", "id" ]
+            },
+            "allowChildren": false
+        }],
+        "import/no-named-as-default": 0,
+        "no-unused-expressions": ["error", { "allowTernary": true }]
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": false,
+        "codeFrame": false
+    },
+    "settings": {
+        "import/resolver": {
+            "babel-module": {},
+            "webpack": {
+                "config": "webpack-config/dev.config.js"
+            }
+        }
+    }
+}

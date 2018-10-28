@@ -18,25 +18,25 @@ module.exports = {
       'redux-thunk',
       'semantic-ui-react',
       'uuid',
-      'validatorjs'
-    ]
+      'validatorjs',
+    ],
   },
   output: {
     path: outputPath,
     filename: '[name].[hash:4].dll.js',
-    library: '[name]_[hash]'
+    library: '[name]_[hash]',
   },
   devtool: 'source-map',
   optimization: {
-    minimize: false
+    minimize: false,
   },
   performance: {
-    hints: false
+    hints: false,
   },
   plugins: [
     new webpack.DllPlugin({
       path: path.join(outputPath, '[name]-manifest.json'),
-      name: '[name]_[hash]'
-    })
-  ]
+      name: '[name]_[hash]',
+    }),
+  ],
 };

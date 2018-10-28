@@ -9,10 +9,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const common = require('./webpack.common.js');
 
 // the path(s) that should be cleaned
-let pathsToClean = ['dist/*.js', 'dist/*.map'];
+const pathsToClean = ['dist/*.js', 'dist/*.map'];
 
 // the clean options to use
-let cleanOptions = {
+const cleanOptions = {
   verbose: true,
   dry: false,
   beforeEmit: true,
@@ -30,7 +30,7 @@ config.devServer = {
   stats: 'minimal',
 };
 
-//config.devtool = 'cheap-module-eval-source-map';
+// config.devtool = 'cheap-module-eval-source-map';
 config.devtool = 'source-map';
 
 config.module = {
@@ -41,7 +41,7 @@ config.module = {
         fallback: 'style-loader',
         use: [
           { loader: 'css-loader' },
-          //{ loader: 'css-loader', options: { minimize: true } },
+          // { loader: 'css-loader', options: { minimize: true } },
           { loader: 'postcss-loader' },
           { loader: 'sass-loader' },
         ],
@@ -69,7 +69,7 @@ config.plugins = [
   //   filepath: path.resolve(__dirname, './dist/*.dll.js')
   // }),
   new WriteFilePlugin(),
-  //new BundleAnalyzerPlugin()
+  // new BundleAnalyzerPlugin()
 ];
 
 module.exports = merge(common, config);

@@ -5,7 +5,7 @@ import throttle from 'lodash/throttle';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { loadState, saveState } from './helpers/localStorage';
 import rootReducer from './reducer';
-//mock data
+// mock data
 import MOCK_DATA from './helpers/MOCK_DATA.json';
 
 const configureStore = () => {
@@ -15,8 +15,8 @@ const configureStore = () => {
     users: {
       data: MOCK_DATA,
       pending: false,
-      errorMessage: ''
-    }
+      errorMessage: '',
+    },
   };
   // if persistedState is not empty then assign parsed persistedState to initState
   if (persistedState) {
@@ -24,7 +24,7 @@ const configureStore = () => {
   }
 
   const logger = createLogger({
-    collapsed: true
+    collapsed: true,
   });
 
   const middlewares = [thunk, logger];

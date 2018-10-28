@@ -1,4 +1,3 @@
-'use strict';
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -7,11 +6,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = {};
 
 config.entry = {
-  main: __dirname + '/src/app/app.jsx',
+  main: `${__dirname}/src/app/app.jsx`,
 };
 
 config.output = {
-  path: __dirname + '/dist',
+  path: `${__dirname}/dist`,
   publicPath: '/',
   filename: '[name].[hash].js',
 };
@@ -27,13 +26,17 @@ config.module = {
   rules: [
     {
       test: /\.jsx?$/,
-      use: {
-        loader: 'babel-loader?cacheDirectory',
-        // options: {
-        //   presets: ['env', 'react', 'stage-0']
-        // }
-      },
       exclude: /node_modules/,
+      use: [
+        { loader: 'babel-loader' },
+        // {
+        //   loader: 'eslint-loader',
+        //   options: {
+        //     quiet: true,
+        //     emitWarning: true,
+        //   },
+        // },
+      ],
     },
     // {
     //   test: /\.(sass|scss)$/,
@@ -105,8 +108,8 @@ config.optimization = {
 
 config.plugins = [
   new HtmlWebpackPlugin({
-    template: __dirname + '/src/public/index.html',
-    favicon: __dirname + '/src/public/favicon.ico',
+    template: `${__dirname}/src/public/index.html`,
+    favicon: `${__dirname}/src/public/favicon.ico`,
     inject: 'body',
   }),
   // new CopyWebpackPlugin([

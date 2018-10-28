@@ -6,7 +6,7 @@ import { Grid, Form, Icon, Input, Segment, Header, Message } from 'semantic-ui-r
 
 const options = [
   { key: 'm', text: 'Male', value: 'male' },
-  { key: 'f', text: 'Female', value: 'female' }
+  { key: 'f', text: 'Female', value: 'female' },
 ];
 
 class FormSection extends React.Component {
@@ -21,10 +21,11 @@ class FormSection extends React.Component {
       lastName: '',
       phone: '',
       gender: '',
-      age: ''
+      age: '',
     },
-    isFormValid: true
+    isFormValid: true,
   };
+
   // preserve the initial state in a new object
   baseState = this.state;
 
@@ -39,9 +40,9 @@ class FormSection extends React.Component {
       lastName: '',
       phone: '',
       gender: '',
-      age: ''
+      age: '',
     },
-    isFormValid: true
+    isFormValid: true,
   };
 
   validate = () => {
@@ -51,19 +52,19 @@ class FormSection extends React.Component {
       lastName: 'required|alpha|min:3|max:30',
       phone: 'required|telephone',
       gender: 'required',
-      age: 'between:18,65|numeric'
+      age: 'between:18,65|numeric',
     };
 
     const validator = new Validator(data, rules);
 
     Validator.register(
       'telephone',
-      function(value, requirement, attribute) {
+      (value, requirement, attribute) => {
         return /^\d{3}-\d{3}-\d{4}$/.test(value);
       },
       'The :attribute phone number is not in the format XXX-XXX-XXXX.'
     );
-    //console.log(validator);
+    // console.log(validator);
     validator.passes(() => {
       // Validation passed
       this.setState({
@@ -72,9 +73,9 @@ class FormSection extends React.Component {
           lastName: '',
           phone: '',
           gender: '',
-          age: ''
+          age: '',
         },
-        isFormValid: true
+        isFormValid: true,
       });
       console.log('val passes');
     });
@@ -91,7 +92,7 @@ class FormSection extends React.Component {
     const value = e.target.value || data.value;
     this.setState({ [name]: value }, () => {
       this.validate();
-      //console.log(this.state);
+      // console.log(this.state);
     });
   };
 
@@ -105,7 +106,7 @@ class FormSection extends React.Component {
 
   submitForm = e => {
     e.preventDefault();
-    //this.validate();
+    // this.validate();
     if (this.state.isFormValid) {
       this.props.addUser(this.state);
       this.resetForm();
@@ -114,7 +115,7 @@ class FormSection extends React.Component {
 
   render() {
     const { firstName, lastName, phone, gender, age, formErrors } = this.state;
-    let formState = {};
+    const formState = {};
     const formHeader = (
       <Header as="h2" color="teal" textAlign="center">
         Add User
@@ -203,13 +204,16 @@ class FormSection extends React.Component {
               basic
               disabled={!this.state.isFormValid}
             >
-              <Icon name="dot circle outline" /> Submit
+              <Icon name="dot circle outline" />
+              Submit
             </Form.Button>
             <Form.Button color="yellow" fluid size="tiny" onClick={this.clearForm} basic>
-              <Icon name="eraser" />Clear
+              <Icon name="eraser" />
+              Clear
             </Form.Button>
             <Form.Button color="yellow" fluid size="tiny" onClick={this.resetForm} basic>
-              <Icon name="refresh" />Reset
+              <Icon name="refresh" />
+              Reset
             </Form.Button>
           </Form.Group>
         </Segment>

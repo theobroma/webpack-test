@@ -8,13 +8,13 @@ import {
   ADD_USER_PENDING,
   ADD_USER_FULFILLED,
   REMOVE_USER_PENDING,
-  REMOVE_USER_FULFILLED
+  REMOVE_USER_FULFILLED,
 } from './actions';
 
 export const usersInitialState = {
   data: [],
   pending: false,
-  errorMessage: ''
+  errorMessage: '',
 };
 
 function users(state = usersInitialState, action) {
@@ -24,19 +24,19 @@ function users(state = usersInitialState, action) {
     case REMOVE_USER_PENDING:
       return {
         ...state,
-        pending: true
+        pending: true,
       };
     case FETCH_USERS_REJECTED:
       return {
         ...state,
         pending: false,
-        errorMessage: action.error
+        errorMessage: action.error,
       };
     case FETCH_USERS_FULFILLED:
       return {
         ...state,
         pending: false,
-        data: action.users
+        data: action.users,
       };
     case ADD_USER_FULFILLED:
       return {
@@ -45,16 +45,16 @@ function users(state = usersInitialState, action) {
         data: [
           {
             id: action.id,
-            ...action.user
+            ...action.user,
           },
-          ...state.data
-        ]
+          ...state.data,
+        ],
       };
     case REMOVE_USER_FULFILLED:
       return {
         ...state,
         pending: false,
-        data: state.data.filter(user => user.id !== action.id)
+        data: state.data.filter(user => user.id !== action.id),
       };
     default:
       return state;
