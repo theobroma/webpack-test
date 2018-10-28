@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
@@ -14,7 +15,7 @@ let pathsToClean = ['dist/*.js', 'dist/*.map'];
 let cleanOptions = {
   verbose: true,
   dry: false,
-  beforeEmit: true
+  beforeEmit: true,
 };
 
 const config = {};
@@ -26,11 +27,28 @@ config.devServer = {
   historyApiFallback: true,
   open: true,
   overlay: true,
-  stats: 'minimal'
+  stats: 'minimal',
 };
 
 //config.devtool = 'cheap-module-eval-source-map';
 config.devtool = 'source-map';
+
+config.module = {
+  rules: [
+    {
+      test: /\.(sass|scss)$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          { loader: 'css-loader' },
+          //{ loader: 'css-loader', options: { minimize: true } },
+          { loader: 'postcss-loader' },
+          { loader: 'sass-loader' },
+        ],
+      }),
+    },
+  ],
+};
 
 config.plugins = [
   new CleanWebpackPlugin(pathsToClean, cleanOptions),
@@ -39,9 +57,10 @@ config.plugins = [
   // drop any unreachable code.
   new webpack.DefinePlugin({
     'process.env': {
-      NODE_ENV: JSON.stringify('development')
-    }
+      NODE_ENV: JSON.stringify('development'),
+    },
   }),
+  new ExtractTextPlugin({ filename: 'css/[name].css' }),
   // new webpack.DllReferencePlugin({
   //   context: __dirname,
   //   manifest: require('./dist/vendor-manifest.json')
@@ -49,7 +68,7 @@ config.plugins = [
   // new AddAssetHtmlPlugin({
   //   filepath: path.resolve(__dirname, './dist/*.dll.js')
   // }),
-  new WriteFilePlugin()
+  new WriteFilePlugin(),
   //new BundleAnalyzerPlugin()
 ];
 
