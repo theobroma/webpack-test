@@ -5,6 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const OptimizeCSSAssets = require('optimize-css-assets-webpack-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const smp = new SpeedMeasurePlugin();
 const common = require('./webpack.common.js');
 
 const config = {};
@@ -14,7 +16,7 @@ config.mode = 'production';
 config.devtool = 'none';
 //turn off minimize and UglifyJSPlugin to see pretty output bundle
 config.optimization = {
-  minimize: true
+  minimize: true,
 };
 
 config.module = {
@@ -28,11 +30,11 @@ config.module = {
           //use minimize or OptimizeCSSAssets
           //{ loader: 'css-loader', options: { minimize: true } },
           { loader: 'postcss-loader' },
-          { loader: 'sass-loader' }
-        ]
-      })
-    }
-  ]
+          { loader: 'sass-loader' },
+        ],
+      }),
+    },
+  ],
 };
 
 config.plugins = [
@@ -41,8 +43,8 @@ config.plugins = [
   // drop any unreachable code.
   new webpack.DefinePlugin({
     'process.env': {
-      NODE_ENV: JSON.stringify('production')
-    }
+      NODE_ENV: JSON.stringify('production'),
+    },
   }),
   // new webpack.DllReferencePlugin({
   //   context: '.',
@@ -57,7 +59,7 @@ config.plugins = [
     uglifyOptions: {
       output: {
         comments: false,
-        beautify: false
+        beautify: false,
       },
       compress: {
         sequences: true,
@@ -66,12 +68,17 @@ config.plugins = [
         unused: true,
         warnings: false,
         drop_console: true,
-        unsafe: true
-      }
-    }
+        unsafe: true,
+      },
+    },
   }),
   new ExtractTextPlugin({ filename: 'css/[name].css' }),
-  new OptimizeCSSAssets()
+  new OptimizeCSSAssets(),
 ];
 
-module.exports = merge(common, config);
+//use this as default
+// module.exports = merge(common, config);
+
+//uncoment to measure plugins performance
+const mergedConfig = merge(common, config);
+module.exports = smp.wrap(mergedConfig);

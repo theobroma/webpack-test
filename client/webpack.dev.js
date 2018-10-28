@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const smp = new SpeedMeasurePlugin();
+
 const common = require('./webpack.common.js');
 
 const config = {};
@@ -14,9 +17,9 @@ config.module = {
   rules: [
     {
       test: /\.(sass|scss)$/,
-      use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
-    }
-  ]
+      use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+    },
+  ],
 };
 
 config.plugins = [
@@ -25,10 +28,10 @@ config.plugins = [
   // drop any unreachable code.
   new webpack.DefinePlugin({
     'process.env': {
-      NODE_ENV: JSON.stringify('development')
-    }
+      NODE_ENV: JSON.stringify('development'),
+    },
   }),
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
 ];
 
 config.devServer = {
@@ -40,7 +43,12 @@ config.devServer = {
   hot: true,
   // Don't refresh if hot loading fails. Good while
   // implementing the client interface.
-  hotOnly: true
+  hotOnly: true,
 };
 
-module.exports = merge(common, config);
+//use this as default
+// module.exports = merge(common, config);
+
+//uncoment to measure plugins performance
+const mergedConfig = merge(common, config);
+module.exports = smp.wrap(mergedConfig);
